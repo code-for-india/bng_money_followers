@@ -12,3 +12,193 @@
  *= require_tree
  *= require bootstrap
  */
+@font-face{
+	font-family: "Aver";
+	src: url('fonts/Aver.ttf');
+}
+
+/*
+==============================================
+Homepage CSS
+==============================================
+*/
+
+body{
+	overflow-x: hidden; 
+}
+.map{
+	width: 100%;
+}
+
+.search_container{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	padding-top: 10px;
+	padding-right: 15px;
+}
+
+.search_section{
+	margin: auto;
+	width: 500px;
+}
+
+.search{
+	display: inline-block !important;
+	width: 400px !important;
+}
+
+.subscribe_button{
+	margin-top: -35px;
+}
+
+.project_details_container{
+	position: absolute;
+	top: 0px;
+	right: -350px;
+	width: 350px;
+	height: 100%;
+	color: #FFFFFF;
+}
+
+.details{
+	margin: auto;
+  	position: absolute;
+  	top: 0; left: 0; bottom: 0; right: 0;
+  	padding-top: 15px;
+  	padding-right: 15px;
+  	height: 300px;
+  	background: rgba(52, 73, 94, 1);
+  	border-top-left-radius: 20px;
+  	border-bottom-left-radius: 20px;
+}
+
+.details_close{
+	position: absolute;
+	top: 5px;
+	right: 10px;
+}
+
+.project_details_container button{
+	margin-left: 25px;
+}
+
+.subscribe_container{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.subscribe{
+	margin: auto;
+	position: absolute;
+	top: 0; left:0; bottom: 0; right: 0;
+	width: 400px;
+	height: 130px;
+	background: #eeeeee;
+	padding: 30px;
+	border-radius: 10px;
+}
+
+.subscribe button{
+	margin-top: 10px;
+}
+
+.custom_close{
+	position: absolute;
+	top: -5px;
+	right: 10px;
+}
+
+/*
+====================================
+Contract Page CSS
+====================================
+*/
+
+#contract_body{
+	background: #313431;
+}
+
+.contract{
+	margin-top: 40px;
+	background: #eeeeee url('../img/triangle.png') repeat-x;
+	border-bottom: 2px solid #9c9c9c;
+}
+
+.contract_details{
+	margin: auto;
+	padding-top: 40px;
+	padding-bottom: 20px;
+	width: 500px;
+}
+
+.feedback_container{
+	margin-top: 10px;
+	padding-top: 20px;
+	color: #ffffff;
+}
+
+.feedbacks{
+	margin: auto;
+	width: 600px;
+}
+
+.user{
+	font-family: "Aver";
+	font-size: 1.2em;
+}
+
+.feedback_enter button{
+	margin-top: 5px;
+	float: right;
+}
+
+.feedback{
+	clear: both;
+	padding-top: 20px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #9c9c9c;
+}
+
+.feedback_image{
+	width: 300px;
+	height: 350px;
+}
+
+.image_source{
+	float: left;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+/*
+====================================
+Responsive CSS
+====================================
+*/
+
+@media only screen and (max-width : 768px) {
+
+	.search_section{
+		width: 300px;
+	}
+
+	.search{
+		display: inline-block !important;
+		width: 200px !important;
+	}	
+
+	.details{
+		padding-left: 45px;
+		padding-top: 20px;
+	}
+
+	.feedbacks{
+		width: 400px;
+	}
+}

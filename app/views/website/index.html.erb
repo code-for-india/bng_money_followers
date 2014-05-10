@@ -1,4 +1,49 @@
-<% @projects.each do |k, v| %>
-	<%= k %>
-	<%= v %>
-<% end %>
+<div class="backbox">
+    <p>Find World Bank Promoted Projects in your neighbourhood.<br>Find it & Share it.</p> 
+</div>
+<div id="googleMap" style="width:1366px;height:960px;"></div>
+<div class="search_container">
+			<div class="search_section">
+				<input type="text" class="form-control search" placeholder="Enter Location"/>
+				<button id="search_button" type="button" class="btn btn-success" >Search</button>
+			</div>
+
+			<button type="button" class="btn btn-success pull-right subscribe_button">Subscribe</button>
+		</div>
+		<div class="project_details_container">
+			<div class="details">
+				<button type="button" class="close details_close" aria-hidden="true">&times;</button>
+				<dl class="dl-horizontal">
+  					<dt>Project Name</dt>
+  					<dd>Road Construction Road Construction Road Construction Road</dd>
+
+  					<dt>Amount Funded</dt>
+  					<dd>$100000</dd>
+
+	  				<dt>Date Funded</dt>
+  					<dd>5 May, 2014</dd>
+
+  					<dt>Contract Given to</dt>
+  					<dd>Shakti Road Services</dd>
+
+  					<dt>Current Status</dt>
+  					<dd>Completed</dd>
+
+				</dl>
+
+				<button type="button" class="btn btn-warning">World Bank</button>
+				<button type="button" class="btn btn-warning">View Feedbacks</button>
+			</div>
+		</div>
+
+		<div class="subscribe_container">
+			<div class="subscribe">
+				<button id="close_subscribe" type="button" class="close custom_close" aria-hidden="true">&times;</button>
+				<form>
+				<input type="email" class="form-control" placeholder="Enter Email ID" required/>
+				<button id="search_button" type="submit" class="btn btn-success form-control" >Submit</button>
+				</form>
+			</div>
+		</div>
+
+

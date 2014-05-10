@@ -3,10 +3,13 @@
 <head>
   <title>Money Followers</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBUaHlRSi47CQzRz_yxQXt1fvSS-bLzFgM&sensor=false"></script>
+  
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
   <%= csrf_meta_tags %>
 </head>
-<div class="container-fluid">
+<!-- <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
@@ -40,7 +43,7 @@
               <li><a href="../navbar-fixed-top/">Fixed top</a></li>
             </ul>
           </div><!--/.nav-collapse -->
-        </div>
+        <!-- </div>  -->
 <body>
 
 <%= yield %>
