@@ -18,7 +18,7 @@
 				var n = data.data[i][14].search("Andhra Pradesh");
 				if( n != -1)
 					ap++;
-				text += "<tr><td>"+i+"</td><td>"+data.data[i][14]+"</td><td>"+data.data[i][16]+"</td><td>"+data.data[i][20]+"</td><td>"+data.data[i][21]+"</td><td>Rs."+data.data[i][26]*60+"</td></tr>";
+//				text += "<tr><td>"+i+"</td><td>"+data.data[i][14]+"</td><td>"+data.data[i][16]+"</td><td>"+data.data[i][20]+"</td><td>"+data.data[i][21]+"</td><td>Rs."+data.data[i][26]*60+"</td></tr>";
 //				console.log(text);
 				 content[i] = data.data[i][21];	
 				 index[i] = i;
@@ -27,7 +27,6 @@
 			for(i=0; i < content.length ; i++){
 				words[i] = content[i].split(" ");
 			}
-			console.log(words);
 			var dist = [];
 			var no = [];
 			var j=0, k=0;
@@ -67,14 +66,12 @@
 						new_dist.splice(i,1);
 						new_no.splice(i,1);
 					}
-				}
-				
+				}	
 			}
 			var project_name = [];
 			var project_type = [];
 			var project_abstract = [];
 			var project_cost = [];
-			console.log(new_no);
 			j=0;
 			for(i=0; i < 3000; i++)	{
 				if(i == new_no[j]){
@@ -88,18 +85,18 @@
 					continue;
 				}
 			}
-			console.log(new_dist);
-			console.log(project_name);
-			console.log(project_type);
-			console.log(project_abstract);
-			console.log(project_cost);
+			var project_name1 = [];
+			i=0;
 			text += "</table>";
 //			console.log(text);
-			document.write(text);
+//			document.write(text);	
+			project_name = jQuery.grep(project_name, function(n){ return (n); });
+			project_type = jQuery.grep(project_type, function(n){ return (n); });
+			project_abstract = jQuery.grep(project_abstract, function(n){ return (n); });
+			project_cost = jQuery.grep(project_cost, function(n){ return (n); });
+
 		});
-		//console.log(text);
 		//document.write(text);
-		//console.log(json);
 </script>
 </body>
 </html>
