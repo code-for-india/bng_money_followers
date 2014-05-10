@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+<style type="text/css">
+	.submit{
+		background-color: #5cb85c;
+		border-color: #4cae4c;
+		border-radius: 3px;
+		font-size: 15px;
+		color: white;
+	}
+	.upload{
+		width: 175px;
+	}
+</style>
+</head>
+<body> 
+	<form method="POST">
+		<input type="file" class="upload" />
+		<input type="submit" value="Submit" class="submit"/>
+	</form>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.submit').on('click',function(e){
+				e.preventDefault();
+				alert("hello");
+				$.post("upload.php",{},function(data){
+					alert(data);
+				});
+			})
+		});
+	</script>
+</body>
