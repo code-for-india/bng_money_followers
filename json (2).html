@@ -1,0 +1,106 @@
+<html>
+<head>
+</head>
+<body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type='text/javascript'>
+		var text;
+		$.get( "rows.json", function( data ) {
+			text = "<table style=\"width:300px\" border=\"2\">";
+			console.log(text);
+			var ap = 0;
+			var content = [];
+			var index = [];
+			for(i=0; i < 3000; i++)
+			{
+			//	console.log(data.data[i][14]+"|"+ data.data[i][16]+"|"+ data.data[i][20]+"|"+ data.data[i][21]+"|"+ data.data[i][26]);
+//				alert( "Load was performed." );
+				var n = data.data[i][14].search("Andhra Pradesh");
+				if( n != -1)
+					ap++;
+//				text += "<tr><td>"+i+"</td><td>"+data.data[i][14]+"</td><td>"+data.data[i][16]+"</td><td>"+data.data[i][20]+"</td><td>"+data.data[i][21]+"</td><td>Rs."+data.data[i][26]*60+"</td></tr>";
+//				console.log(text);
+				 content[i] = data.data[i][21];	
+				 index[i] = i;
+			}
+			var words = [];
+			for(i=0; i < content.length ; i++){
+				words[i] = content[i].split(" ");
+			}
+			var dist = [];
+			var no = [];
+			var j=0, k=0;
+			for(i=0;i<words.length;i++){
+				for(j=0;j<words[i].length;j++){
+					if(/dist/i.test(words[i][j])){
+						no[i] = index[i];
+						if(words[i][j-1] == "IN"){
+							dist[k] = words[i][j-2];
+							k++;
+						}
+						else{
+							dist[k] = words[i][j-1];
+							k++;
+						}
+					}
+				}
+			}
+			var new_dist = [];
+			var new_no = [];
+			new_dist = unique(dist);
+			function unique(list) {
+				  var result = [];
+				  $.each(list, function(i, e) {
+				    if ($.inArray(e, result) == -1) {
+				    	result.push(e);
+				    	new_no.push(i);
+				    }
+				  });
+				  return result;
+			}
+			var final_no = [];
+			var remove = ["TO","KVA","IN","32","SUB","OF","FOR",":","-",null,"-","HOSPITAL","DRAIN","PRIVATIZATION","POWER","EXISTING"];
+			for(i=0;i<new_dist.length;i++){
+				for(j=0;j<remove.length;j++){
+					if(new_dist[i] == remove[j]){
+						new_dist.splice(i,1);
+						new_no.splice(i,1);
+					}
+				}	
+			}
+			var project_name = [];
+			var project_type = [];
+			var project_abstract = [];
+			var project_cost = [];
+			j=0;
+			for(i=0; i < 3000; i++)	{
+				if(i == new_no[j]){
+					 project_name[i] = data.data[i][14];
+					 project_type[i] = data.data[i][20];
+					 project_abstract[i] = data.data[i][21];
+					 project_cost[i] = data.data[i][26]*60;
+					 j++;
+				}
+				else{
+					continue;
+				}
+			}
+			var project_name1 = [];
+			i=0;
+			text += "</table>";
+//			console.log(text);
+//			document.write(text);	
+			project_name = jQuery.grep(project_name, function(n){ return (n); });
+			project_type = jQuery.grep(project_type, function(n){ return (n); });
+			project_abstract = jQuery.grep(project_abstract, function(n){ return (n); });
+			project_cost = jQuery.grep(project_cost, function(n){ return (n); });
+			//new_dist
+			console.log(new_dist);
+			console.log(project_name);
+			
+
+		});
+		//document.write(text);
+</script>
+</body>
+</html>

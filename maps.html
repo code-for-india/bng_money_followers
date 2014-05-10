@@ -1,17 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script
-src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBUaHlRSi47CQzRz_yxQXt1fvSS-bLzFgM&sensor=false">
-</script>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBUaHlRSi47CQzRz_yxQXt1fvSS-bLzFgM&sensor=false"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="json.js"></script>
+
+</head>
+
+<body>
+
+
+
+<div id="googleMap" style="width:1366px;height:960px;"></div>
+
+
+<input type="input" id="location"></input><button onclick="getLocation()">Find it!</button>
+
+<br/>
+<button onclick="plotStates()">Plot States</button>
+<button onclick="plotDistrict()">Plot Districts</button>
+
+
+
+
+
+
 
 <script>
+
+var mylatlong;
+var map;
+var marker;
+var closedOptions;
+var activeOptions;
+var cityCircle;
+var stateLatLong = [];
+var stateMarker = [];
+var distMarker = [];
+var sCircle = [];
+
+
 function initialize(latitude, longitude, minZoomLevel)
 {
 	
-	
-	
-	var mylatlong = new google.maps.LatLng(latitude,longitude);
+	clearDistricts();
+	mylatlong = new google.maps.LatLng(latitude,longitude);
 	if(typeof minZoomLevel == "undefined")
 		minZoomLevel = 12;
 		
@@ -21,16 +54,16 @@ function initialize(latitude, longitude, minZoomLevel)
 		mapTypeId:google.maps.MapTypeId.ROADMAP
 	};
 	
-	var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+	map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 	
 	
-	var marker = new google.maps.Marker({
+	marker = new google.maps.Marker({
       position: mylatlong,
       map: map,
       title: 'You'
 	});
 	
-	var closedOptions = {
+	closedOptions = {
 		strokeColor: '#7CFC00',
 		strokeOpacity: 0.8,
 		strokeWeight: 2,
@@ -41,7 +74,7 @@ function initialize(latitude, longitude, minZoomLevel)
 		radius: 1000
 	};
 	
-	var activeOptions = {
+	activeOptions = {
 		strokeColor: '#FF0000',
 		strokeOpacity: 0.8,
 		strokeWeight: 2,
@@ -53,7 +86,45 @@ function initialize(latitude, longitude, minZoomLevel)
 	};
 	
 	
-	var cityCircle = new google.maps.Circle(closedOptions);
+	cityCircle = new google.maps.Circle(closedOptions);
+	
+	for(var i = 0; i < 30 ; i++)
+		stateLatLong[i] = 0;
+	
+	
+	stateLatLong[0] = new google.maps.LatLng(17.36, 78.47);
+	stateLatLong[1] = new google.maps.LatLng(27, 93);
+	stateLatLong[2] = new google.maps.LatLng(26.14, 91.77);
+	stateLatLong[3] = new google.maps.LatLng(25.37, 85.13);
+	stateLatLong[4] = new google.maps.LatLng(30.75, 76.78);
+	stateLatLong[5] = new google.maps.LatLng(21.27, 81.60);
+	stateLatLong[6] = new google.maps.LatLng(15.49, 73.82);
+	stateLatLong[7] = new google.maps.LatLng(23.21, 72.68);
+	stateLatLong[8] = new google.maps.LatLng(30.73, 76.78);
+	stateLatLong[9] = new google.maps.LatLng(31.10, 77.17);
+	stateLatLong[10] = new google.maps.LatLng(33.45, 76.24);
+	stateLatLong[11] = new google.maps.LatLng(23.35, 85.33);
+	stateLatLong[12] = new google.maps.LatLng(12.97, 77.56);
+	stateLatLong[13] = new google.maps.LatLng(8.50, 76.97);
+	stateLatLong[14] = new google.maps.LatLng(10.57, 72.63);
+	stateLatLong[15] = new google.maps.LatLng(23.25, 77.41);
+	stateLatLong[16] = new google.maps.LatLng(18.96, 72.82);
+	stateLatLong[17] = new google.maps.LatLng(24.81, 93.95);
+	stateLatLong[18] = new google.maps.LatLng(25.57, 91.88);
+	stateLatLong[19] = new google.maps.LatLng(23.36, 92.00);
+	stateLatLong[20] = new google.maps.LatLng(25.67, 94.12);
+	stateLatLong[21] = new google.maps.LatLng(20.15, 85.50);
+	stateLatLong[22] = new google.maps.LatLng(30.79, 76.78);
+	stateLatLong[23] = new google.maps.LatLng(26.57, 73.83);
+	stateLatLong[24] = new google.maps.LatLng(27.33, 88.62);
+	stateLatLong[25] = new google.maps.LatLng(13.09, 80.27);
+	stateLatLong[26] = new google.maps.LatLng(23.84, 91.28);
+	stateLatLong[27] = new google.maps.LatLng(26.85, 80.91);
+	stateLatLong[28] = new google.maps.LatLng(30.33, 78.06);
+	stateLatLong[29] = new google.maps.LatLng(22.56, 88.36);
+	
+	
+	
 	
 	
 	google.maps.event.addListener(cityCircle, 'click', function() {
@@ -62,14 +133,16 @@ function initialize(latitude, longitude, minZoomLevel)
 
 }
 
+
+
 function getLocation()
 {
 	if (navigator.geolocation)
     {
-		navigator.geolocation.getCurrentPosition(showPosition, getLocationFromInput);
+		navigator.geolocation.getCurrentPosition(showPosition, showIndia);
     }
 	else{
-		alert(123);
+//		alert(123);
 		x.innerHTML = "Geolocation is not supported by this browser.";
 	}
 	
@@ -77,36 +150,132 @@ function getLocation()
 
 function showPosition(position)
 {
+	
 	initialize(position.coords.latitude, position.coords.longitude);
+	
 }
 
-function getLocationFromInput()
+function showIndia()
 {
-	geocoder = new google.maps.Geocoder();
+//	geocoder = new google.maps.Geocoder();
 //	var address = document.getElementById("address").value;
-	var address = "Bangalore";
+//	var address = "Andhra Pradesh";
 	
-	geocoder.geocode( { 'address': address}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
+//	geocoder.geocode( { 'address': address}, function(results, status) {
+  //    if (status == google.maps.GeocoderStatus.OK) {
         //In this case it creates a marker, but you can get the lat and lng from the location.LatLng
 		//console.log("Hi");
+//		console.log(results[0].geometry.location.k);
+//		console.log(results[0].geometry.location.A);
+//		initialize(results[0].geometry.location.k, results[0].geometry.location.A);
+  //    } else {
+		initialize("21.0000", "78.0000", 5);
+//      }
+//   });
+	
+	
+}
+
+
+function getLocation(){
+		geocoder = new google.maps.Geocoder();
+	var address = document.getElementById("location").value;
+
+	geocoder.geocode( { 'address': address}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+
 		console.log(results[0].geometry.location.k);
 		console.log(results[0].geometry.location.A);
 		initialize(results[0].geometry.location.k, results[0].geometry.location.A);
-      } else {
-		initialize("21.0000", "78.0000", 5);
+		} else {
+		showIndia();
       }
-    });
-	
-	
+	});
 }
+
+
+
+function plotStates()
+{
+	console.log(stateLatLong);
+	clearDistricts();
+	clearStates();
+//	setAllMap(null);
+	var stateCircles = [];
+	var circleColors = ["#ffa500","#4c8bff","#ffcb05","#f75b68","#ffecce","#FF2929","#7DD2AF","#7FBF51","#D7B544","#81391C"];
+	
+	
+	for(var i = 0; i < 30 ; i++)
+	{	
+		var thisColor = circleColors[Math.floor(Math.random()*10)];
+		
+		stateCircles[i] = {
+		strokeColor: thisColor,
+		strokeOpacity: 0.8,
+		strokeWeight: 2,
+		fillColor: thisColor,
+		fillOpacity: 0.2,
+		map: map,
+		center: stateLatLong[i],
+		radius: money[i]/100000
+		};
+		console.log(stateCircles[i]);
+		sCircle[i] = new google.maps.Circle(stateCircles[i]);
+		
+		
+		if(money[i]/100000)
+		{
+			stateMarker[i] = new google.maps.Marker({
+				position: stateLatLong[i],
+				map: map,
+				title: states[i]
+			});
+		}
+		else
+		{
+			stateMarker[i] = new google.maps.Marker({
+				position: undefined,
+				map: map,
+				title: states[i]
+			});
+		}
+		
+	}
+	
+	
+	for(i = 0; i < 30; i++)
+	{
+		
+		(function(i){
+			if(sCircle[i] != undefined){
+				console.log("Before event listener",i);
+				google.maps.event.addListener(sCircle[i], 'click', function(){
+					console.log(states[i], money[i], sanctioned[i]);
+				});
+			}
+		}(i));
+		
+	}
+}
+
+
+
+function clearStates(){
+	for (var i = 0; i < stateMarker.length; i++ ) {
+		stateMarker[i].setMap(null);
+	}
+	stateMarker.length = 0;
+	
+	
+	
+	for (var i = 0; i < sCircle.length; i++ ) {
+		sCircle[i].setMap(null);
+	}
+	sCircle.length = 0;
+}
+	
 
 google.maps.event.addDomListener(window, 'load', getLocation);
 </script>
-</head>
-
-<body>
-<div id="googleMap" style="width:1366px;height:960px;"></div>
-
 </body>
 </html>
