@@ -1,0 +1,28 @@
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type='text/javascript'>
+		var text;
+		$.get( "rows.json", function( data ) {
+			text = "<table style=\"width:300px\" border=\"2\">";
+			console.log(text);
+			for(i=0; i < data.data.length; i++)
+			{
+			//	console.log(data.data[i][14]+"|"+ data.data[i][16]+"|"+ data.data[i][20]+"|"+ data.data[i][21]+"|"+ data.data[i][26]);
+//				alert( "Load was performed." );
+				text += "<tr><td>"+data.data[i][14]+"</td><td>"+data.data[i][16]+"</td><td>"+data.data[i][20]+"</td><td>"+data.data[i][21]+"</td><td>Rs."+data.data[i][26]*60+"</td></tr>";
+//				console.log(text);
+			}
+//			console.log(text);
+			text += "</table>";
+			console.log(text);
+			document.write(text);
+		});
+		console.log(text);
+		document.write(text);
+		console.log(json);
+</script>
+</head>
+<body>
+</body>
+</html>
