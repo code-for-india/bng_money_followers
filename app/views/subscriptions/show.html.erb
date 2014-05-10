@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @subscription.name %>
+</p>
+
+<p>
+  <strong>Company name:</strong>
+  <%= @subscription.company_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @subscription.email_id %>
+</p>
+
+<p>
+  <strong>Project category:</strong>
+  <%= @subscription.project_category_id %>
+</p>
+
+<p>
+  <strong>Project type:</strong>
+  <%= @subscription.project_type_id %>
+</p>
+
+<p>
+  <strong>Contact no:</strong>
+  <%= @subscription.contact_no %>
+</p>
+
+<%= link_to 'Edit', edit_subscription_path(@subscription) %> |
+<%= link_to 'Back', subscriptions_path %>
