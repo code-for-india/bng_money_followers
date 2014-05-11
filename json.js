@@ -56,31 +56,28 @@ function plotDistrict()
 	clearStates();
 	clearDistricts();
 	var text;
-	var project_name = [];
-	var project_type = [];
-	var project_abstract = [];
-	var project_cost = [];
 	$.get( "rows.json", function( data ) {
 		text = "<table style=\"width:300px\" border=\"2\">";
 		console.log(text);
 		var ap = 0;
 		var content = [];
 		var index = [];
-//		for(i=0; i < 3000; i++)
-//		{
+		for(i=0; i < 3000; i++)
+		{
 		//	console.log(data.data[i][14]+"|"+ data.data[i][16]+"|"+ data.data[i][20]+"|"+ data.data[i][21]+"|"+ data.data[i][26]);
-//				alert( "Load was performed." );
-			
-//				text += "<tr><td>"+i+"</td><td>"+data.data[i][14]+"</td><td>"+data.data[i][16]+"</td><td>"+data.data[i][20]+"</td><td>"+data.data[i][21]+"</td><td>Rs."+data.data[i][26]*60+"</td></tr>";
-//				console.log(text);
-//			 content[i] = data.data[i][21];	
-//			 index[i] = i;
-//		}
+	//				alert( "Load was performed." );
+			var n = data.data[i][14].search("Andhra Pradesh");
+			if( n != -1)
+				ap++;
+//		text += "<tr><td>"+i+"</td><td>"+data.data[i][14]+"</td><td>"+data.data[i][16]+"</td><td>"+data.data[i][20]+"</td><td>"+data.data[i][21]+"</td><td>Rs."+data.data[i][26]*60+"</td></tr>";
+	//				console.log(text);
+			 content[i] = data.data[i][21];	
+			 index[i] = i;
+		}
 		var words = [];
-		for(i=0; i < data.data.length ; i++){
+		for(i=0; i < content.length ; i++){
 			words[i] = content[i].split(" ");
 		}
-		console.log(words);
 		var dist = [];
 		var no = [];
 		var j=0, k=0;
@@ -100,14 +97,12 @@ function plotDistrict()
 			}
 		}
 //		var new_dist = [];
-//		var new_no = [];
 //		new_dist = unique(dist);
 //		function unique(list) {
 //			  var result = [];
 //			  $.each(list, function(i, e) {
 //				if ($.inArray(e, result) == -1) {
 //					result.push(e);
-//					new_no.push(i);
 //				}
 //			  });
 //			  return result;
@@ -118,14 +113,16 @@ function plotDistrict()
 			for(j=0;j<remove.length;j++){
 				if(dist[i] == remove[j]){
 					dist.splice(i,1);
-					no.splice(i,1);
 				}
 			}	
 		}
-		
+		var project_name = [];
+		var project_type = [];
+		var project_abstract = [];
+		var project_cost = [];
 		j=0;
-		for(i=0; i < data.data.length; i++)	{
-			if(i == no[j]){
+		for(i=0; i < 8000; i++)	{
+			if(i == no[i]){
 				 project_name[i] = data.data[i][14];
 				 project_type[i] = data.data[i][20];
 				 project_abstract[i] = data.data[i][21];
@@ -139,44 +136,60 @@ function plotDistrict()
 		var project_name1 = [];
 		i=0;
 		text += "</table>";
-//			console.log(text);
-//			document.write(text);	
+	//console.log(text);
+	//	document.write(text);	
 		project_name = jQuery.grep(project_name, function(n){ return (n); });
 		project_type = jQuery.grep(project_type, function(n){ return (n); });
 		project_abstract = jQuery.grep(project_abstract, function(n){ return (n); });
 		project_cost = jQuery.grep(project_cost, function(n){ return (n); });
+		console.log(project_name);
+		console.log(project_type);
+		console.log(dist);
 		
+		var sumDist = [];
 		
-		
-		
-		for(var i = 0; i < new_dist.length ; i++)
-		{	
-		
-			geocoder = new google.maps.Geocoder();
-		//	var address = document.getElementById("address").value;
-			(function(i){
-				geocoder.geocode( { 'address': new_dist[i]}, function(results,status){
-					console.log("address",new_dist[i]);
-					if (status == google.maps.GeocoderStatus.OK) {
-						console.log(results[0].geometry.location.k);
-						console.log(results[0].geometry.location.A);
-						distMarker[i] = new google.maps.Marker({
-							position: new google.maps.LatLng(results[0].geometry.location.k,results[0].geometry.location.A),
-							map: map,
-							title: new_dist[i]
-						});
-						console.log("Before event listener",i);
-						google.maps.event.addListener(distMarker[i], 'click', function(){
-							
-							console.log(project_name[i]);
-						});
-					}
-				});
-			}(i));
+		for(i = 0 ; i < dist.length; i++)
+		{
+			if(isNaN(sumDist[dist[i]]))
+				sumDist[dist[i]] = 0;
+			sumDist[dist[i]]++;
 		}
 		
+		console.log(sumDist);
 		
+		dist = [];
+		for(var key in sumDist){
+			if(sumDist.hasOwnProperty(key))
+				dist.push(key);
+		}
 		
+		console.log(dist);
+		
+		for(var i = 0; i < dist.length ; i++)
+		{	
+	
+		geocoder = new google.maps.Geocoder();
+	//	var address = document.getElementById("address").value;
+		(function(i){
+			geocoder.geocode( { 'address': dist[i]}, function(results,status){
+				console.log("address",dist[i]);
+				if (status == google.maps.GeocoderStatus.OK) {
+					console.log(results[0].geometry.location.k);
+					console.log(results[0].geometry.location.A);
+					distMarker[i] = new google.maps.Marker({
+						position: new google.maps.LatLng(results[0].geometry.location.k,results[0].geometry.location.A),
+						map: map,
+						title: dist[i]
+					});
+					console.log("Before event listener",i);
+					google.maps.event.addListener(distMarker[i], 'click', function(){
+						
+						console.log(project_name[i]);
+					});
+				}
+			});
+		}(i));
+		}
 	});
 }
 function clearDistricts(){
@@ -185,3 +198,18 @@ function clearDistricts(){
 	}
 	distMarker.length = 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
