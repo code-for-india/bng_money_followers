@@ -80,6 +80,7 @@ function plotDistrict()
 		for(i=0; i < data.data.length ; i++){
 			words[i] = content[i].split(" ");
 		}
+		console.log(words);
 		var dist = [];
 		var no = [];
 		var j=0, k=0;
@@ -98,8 +99,8 @@ function plotDistrict()
 				}
 			}
 		}
-		var new_dist = [];
-		var new_no = [];
+//		var new_dist = [];
+//		var new_no = [];
 //		new_dist = unique(dist);
 //		function unique(list) {
 //			  var result = [];

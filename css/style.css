@@ -1,15 +1,319 @@
-@charset "UTF-8";
-/*
- * jQuery File Upload Plugin CSS Example 8.8.2
- * https://github.com/blueimp/jQuery-File-Upload
- *
- * Copyright 2013, Sebastian Tschan
- * https://blueimp.net
- *
- * Licensed under the MIT license:
- * http://www.opensource.org/licenses/MIT
- */
+@font-face{
+	font-family: "Aver";
+	src: url('fonts/Aver.ttf');
+}
 
-body {
-  padding-top: 60px;
+/*
+==============================================
+Homepage CSS
+==============================================
+*/
+
+body{
+	overflow-x: hidden; 
+	font-family: 'Ubuntu';
+}
+
+.homepage{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background: url('../img/landing.PNG');
+	background-size: cover;
+	z-index: 100;
+}
+
+.heading{
+	font-family: 'Josefin Sans', sans-serif;
+	color: #ffffff;
+	font-size: 6em;
+	text-align: center;
+	padding-top: 150px;
+}
+
+.heading_caption{
+	margin: auto;
+	padding-top: 15px;
+	color: #FFFFFF;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 1.3em;
+	width: 500px;
+	text-align: justify;
+}
+
+.begin_button{
+	display: block;
+	margin: auto;
+	margin-top: 20px;
+	width: 200px;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.map{
+	width: 100%;
+	width: 100%;
+	height: 800px;
+}
+
+.search_container{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	padding-top: 10px;
+	padding-right: 15px;
+	z-index: 5;
+}
+
+.search_section{
+	margin: auto;
+	width: 500px;
+}
+
+.search{
+	display: inline-block !important;
+	width: 400px;
+}
+
+.subscribe_button{
+	margin-top: -35px;
+}
+
+.project_details_container{
+	position: absolute;
+	top: 0px;
+	right: -350px;
+	width: 350px;
+	height: 100%;
+	color: #FFFFFF;
+}
+
+.details{
+	margin: auto;
+  	position: absolute;
+  	top: 0; left: 0; bottom: 0; right: 0;
+  	padding-top: 30px;
+  	padding-right: 15px;
+  	height: 300px;
+  	background: rgba(52, 73, 94, 1);
+  	border-top-left-radius: 20px;
+  	border-bottom-left-radius: 20px;
+}
+
+.details_close{
+	position: absolute;
+	top: 5px;
+	right: 10px;
+}
+
+.project_details_container button{
+	margin-left: 25px;
+}
+
+.subscribe_container{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.subscribe{
+	margin: auto;
+	position: absolute;
+	top: 0; left:0; bottom: 0; right: 0;
+	width: 400px;
+	height: 130px;
+	background: #eeeeee;
+	padding: 30px;
+	border-radius: 10px;
+}
+
+.subscribe button{
+	margin-top: 10px;
+}
+
+.custom_close{
+	position: absolute;
+	top: -5px;
+	right: 10px;
+}
+
+/*
+====================================
+Contract Page CSS
+====================================
+*/
+
+#contract_body{
+	background: url('../img/bg.png');
+	color: #FFFFFF;
+	font-family: 'Varela', sans-serif;
+}
+
+#contract_body .heading{
+	padding-top: 10px;
+	font-size: 4em;
+}
+
+.contract{
+	margin-top: 30px;
+	border-bottom: 2px solid #ffffff;
+}
+
+.contract_details{
+	margin: auto;
+	padding-top: 15px;
+	padding-bottom: 20px;
+	width: 600px;
+	font-size: 1.1em;
+}
+
+.feedback_container{
+	margin-top: 10px;
+	padding-top: 20px;
+	color: #ffffff;
+}
+
+.feedbacks{
+	margin: auto;
+	width: 600px;
+}
+
+.user{
+	font-family: "Aver";
+	font-size: 1.2em;
+}
+
+.feedback_enter{
+	padding-bottom: 60px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.feedback_enter button{
+	margin-top: 5px;
+	float: right;
+}
+
+.feedback{
+	clear: both;
+	padding-top: 20px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #9c9c9c;
+}
+
+.feedback_image{
+	width: 300px;
+	height: 350px;
+	border: 5px solid #FFFFFF;
+}
+
+.image_source{
+	float: left;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+
+/*
+====================================
+Responsive CSS
+====================================
+*/
+
+@media only screen and (max-width : 768px) {
+
+	.search_section{
+		width: 300px;
+	}
+
+	.search{
+		display: inline-block !important;
+		width: 200px;
+	}	
+
+	.details{
+		padding-left: 45px;
+		padding-top: 20px;
+	}
+
+	.feedbacks{
+		width: 400px;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content; 
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  } 
+}
+@mixin animation($animation) {
+  -webkit-animation: #{$animation};
+	-moz-animation: #{$animation};
+	-ms-animation: #{$animation};
+	animation: #{$animation};
+}
+@mixin transform($transform) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  transform: $transform;
+}
+
+@include keyframes(bounce) {
+	0%, 20%, 50%, 80%, 100% {
+    @include transform(translateY(0));
+  }
+	40% {
+    @include transform(translateY(-30px));
+  }
+	60% {
+    @include transform(translateY(-15px));
+  }
+}
+
+.arrow {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  margin-left:-20px;
+  width: 40px;
+  height: 40px;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0yOTMuNzUxLDQ1NS44NjhjLTIwLjE4MSwyMC4xNzktNTMuMTY1LDE5LjkxMy03My42NzMtMC41OTVsMCwwYy0yMC41MDgtMjAuNTA4LTIwLjc3My01My40OTMtMC41OTQtNzMuNjcyICBsMTg5Ljk5OS0xOTBjMjAuMTc4LTIwLjE3OCw1My4xNjQtMTkuOTEzLDczLjY3MiwwLjU5NWwwLDBjMjAuNTA4LDIwLjUwOSwyMC43NzIsNTMuNDkyLDAuNTk1LDczLjY3MUwyOTMuNzUxLDQ1NS44Njh6Ii8+DQo8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMjIwLjI0OSw0NTUuODY4YzIwLjE4LDIwLjE3OSw1My4xNjQsMTkuOTEzLDczLjY3Mi0wLjU5NWwwLDBjMjAuNTA5LTIwLjUwOCwyMC43NzQtNTMuNDkzLDAuNTk2LTczLjY3MiAgbC0xOTAtMTkwYy0yMC4xNzgtMjAuMTc4LTUzLjE2NC0xOS45MTMtNzMuNjcxLDAuNTk1bDAsMGMtMjAuNTA4LDIwLjUwOS0yMC43NzIsNTMuNDkyLTAuNTk1LDczLjY3MUwyMjAuMjQ5LDQ1NS44Njh6Ii8+DQo8L3N2Zz4=);
+  background-size: contain;
+}
+
+.bounce {
+  @include animation(bounce 2s infinite);
+}
+
+.bounce:hover{
+	cursor: pointer;
 }
